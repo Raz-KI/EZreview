@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EZ Review</title>
+
+<style>
+:root {
+  --bg: #0f0d0a;
+  --card: #141210;
+  --accent: #caa24d;
+  --accent-hover: #b18c3f;
+  --text-main: #f2efe9;
+  --text-light: #b6b1a7;
+  --border: #2a2621;
+  --input: #1b1916;
+  --success: #6aa27c;
+}
+
+* { box-sizing: border-box; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+
+body {
+  background: radial-gradient(circle at top, #1b1814, #0c0a08);
+  margin: 0;
+  padding: 1rem;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-main);
+}
+
+.container {
+  background: linear-gradient(180deg, #151310, #0f0d0a);
+  max-width: 560px;
+  width: 100%;
+  padding: 1.75rem;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+}
+
+h1 {
+    text-align: center;
+}
+header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+header h1 {
+  color: var(--accent);
+  letter-spacing: 0.6px;
+  margin-bottom: 0.3rem;
+}
+
+header p {
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
+
+.form-group { margin-bottom: 1.25rem; }
+
+label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+  color: var(--text-light);
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--input);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-main);
+  font-size: 1rem;
+}
+
+input::placeholder { color: #6f6a60; }
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(202,162,77,0.35);
+}
+
+.traits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.trait-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--input);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.trait-item input { accent-color: var(--accent); }
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #1a1406;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: transform 0.05s, box-shadow 0.15s;
+}
+
+button:hover { box-shadow: 0 6px 18px rgba(202,162,77,0.3); }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.copy-btn {
+  background: linear-gradient(135deg, #6aa27c, #4e7d5c);
+  color: #f0fff7;
+}
+
+.result-area {
+  display: none;
+  margin-top: 1.6rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.4rem;
+}
+
+textarea { height: 140px; resize: vertical; }
+
+.loading-box {
+  display: none;
+  text-align: center;
+  margin-top: 1.2rem;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  border: 3px solid rgba(255,255,255,0.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 0.5rem;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 480px) {
+  .traits-grid { grid-template-columns: 1fr 1fr; }
+  .container { padding: 1.4rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>EZ Review</h1>
+    <!-- <p>Warm, human-sounding restaurant reviews</p> -->
+  </header>
+
+  <!-- <div class="container"> -->
+    <header>Restaurant Name
+        <!-- We can scale here later -->
+    <!-- <input type="text" id="restaurantName" placeholder="e.g. Charcoal Grill House"> -->
+    <p>Charcol Hut</p>
+  <!-- </div> -->
+    </header>
+
+  <div class="form-group">
+    <label><h1>Select The Traits You Liked</h1></label>
+    <div class="traits-grid">
+      <label class="trait-item"><input type="checkbox" value="Great ambience"> Ambience</label>
+      <label class="trait-item"><input type="checkbox" value="Very tasty food"> Tasty Food</label>
+      <label class="trait-item"><input type="checkbox" value="Good service"> Service</label>
+      <label class="trait-item"><input type="checkbox" value="Friendly staff"> Staff</label>
+      <label class="trait-item"><input type="checkbox" value="Affordable prices"> Affordable</label>
+      <label class="trait-item"><input type="checkbox" value="Clean environment"> Clean</label>
+      <label class="trait-item"><input type="checkbox" value="Large portions"> Portions</label>
+      <label class="trait-item"><input type="checkbox" value="Fast service"> Fast</label>
+      <label class="trait-item"><input type="checkbox" value="Cozy atmosphere"> Cozy</label>
+      <label class="trait-item"><input type="checkbox" value="Amazing Drinks"> Drinks</label>
+    </div>
+  </div>
+
+  <button id="generateBtn">Generate Review</button>
+
+  <div class="loading-box" id="loadingBox">
+    <div class="spinner"></div>
+    <div id="loadingText">Warming up the grill…</div>
+  </div>
+
+  <div class="result-area" id="resultArea">
+    <label>Your Review (P.S. You can also edit this)</label>
+    <textarea id="outputReview"></textarea>
+    <button class="copy-btn" id="copyBtn">Copy the review & Open Google Maps</button>
+  </div>
+</div>
+
+<script>
+const generateBtn = document.getElementById('generateBtn');
+const copyBtn = document.getElementById('copyBtn');
+const loadingBox = document.getElementById('loadingBox');
+const loadingText = document.getElementById('loadingText');
+const outputReview = document.getElementById('outputReview');
+const resultArea = document.getElementById('resultArea');
+
+const wittyTexts = [
+  "Warming up the grill…",
+  "Searing some adjectives…",
+  "Infusing smoky flavor…",
+  "Consulting the pitmaster…",
+  "Letting the flavors mingle…",
+  "Plating your review nicely…"
+];
+
+let wittyInterval;
+
+generateBtn.onclick = async () => {
+    // Did somoe error handling here to scale for later
+//   const name = restaurantName.value.trim();
+  const name = "Charcol Hut";
+  const traits = [...document.querySelectorAll('.trait-item input:checked')].map(c => c.value);
+
+  if (!name) return alert("Please enter a restaurant name");
+
+  setLoading(true);
+
+  try {
+    const res = await fetch('/generate-review', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ name, traits })
+    });
+    const data = await res.json();
+    outputReview.value = data.review || '';
+    resultArea.style.display = 'block';
+  } catch {
+    alert("Server error — is your backend running?");
+  } finally {
+    setLoading(false);
+  }
+};
+
+copyBtn.onclick = () => {
+  navigator.clipboard.writeText(outputReview.value);
+  window.open(`https://www.google.com/maps/place/The+Charcoal+Hut/@52.6278697,-1.1240484,17z/data=!4m12!1m2!2m1!1scharcol+hut!3m8!1s0x4877616ecbe326eb:0x9f570dc051a88fc7!8m2!3d52.6278697!4d-1.1192848!9m1!1b1!15sCgxjaGFyY29hbCBodXRaDiIMY2hhcmNvYWwgaHV0kgEKcmVzdGF1cmFudOABAA!16s%2Fg%2F1td9q0qb?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D`, '_blank');
+};
+
+function setLoading(state) {
+  generateBtn.disabled = state;
+  copyBtn.disabled = state;
+  loadingBox.style.display = state ? 'block' : 'none';
+
+  if (state) {
+    let i = 0;
+    loadingText.textContent = wittyTexts[i];
+    wittyInterval = setInterval(() => {
+      i = (i + 1) % wittyTexts.length;
+      loadingText.textContent = wittyTexts[i];
+    }, 1800);
+  } else {
+    clearInterval(wittyInterval);
+  }
+}
+</script>
+
+</body>
+</html>
