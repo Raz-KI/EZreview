@@ -48,6 +48,13 @@ async def generate_review(request: ReviewRequest):
     # Prepare the traits string
     traits_str = ", ".join(request.traits) if request.traits else "general great experience"
     
+    import random
+    tausif_in = ""
+    if random.random() < 0.2:
+        tausif_in = "-That Tausif prepared high-quality drinks or made refreshing drinks or very tasty drinks (one of this but different wordings)"
+    else:
+        tausif_in = ""
+    
     # Create a descriptive prompt for the AI
     prompt = (
         
@@ -56,7 +63,7 @@ async def generate_review(request: ReviewRequest):
         Dont mention any specific food or drink items.
         The review must mention:
         -That Sneha provided excellent service or was very helpful or was very friendly (one of this but different wordings)
-        -That Tausif prepared high-quality drinks or made refreshing drinks or very tasty drinks (one of this but different wordings)
+        `{tausif_in}`
 
         Do not repeat the same wording across reviews.
         Use different sentence structures, vocabulary, and tone every time.
@@ -66,7 +73,7 @@ async def generate_review(request: ReviewRequest):
         For example, 'atmosphere' could be 'atmospher', 'amazing' could be 'amazin'. Keep the tone natural and personal. 
         Do not include any special characters like asterisks (*) or emojis for decoration. Use very less punctations and exlamation marks, infact use only one exclamation mark. Write informally. And strictly no Emojis."""
     )
-
+    tausif_in = ""
     try:
         # Call the Gemini 2.0 Flash model
         response = client.models.generate_content(
