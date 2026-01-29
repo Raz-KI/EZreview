@@ -248,6 +248,11 @@ generateBtn.onclick = async () => {
     const data = await res.json();
     outputReview.value = data.review || '';
     resultArea.style.display = 'block';
+    // scroll the result into view so the user sees the generated review
+    // wait a tick for the element to become visible, then smooth-scroll
+    requestAnimationFrame(() => {
+      resultArea.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
   } catch {
     alert("Server error — is your backend running?");
   } finally {

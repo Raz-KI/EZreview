@@ -54,7 +54,7 @@ async def generate_review(request: ReviewRequest):
         f"""Write a positive, authentic-sounding Google review for a cafe named '{request.name}'. 
         The review should be enthusiastic, around 60-70 words long, and incorporate the following themes: {traits_str}.
         Dont mention any specific food or drink items.
-        Paraphrase and include these sentences in the review naturally and randomly" "Service by Shehnaz was exceptional" "Drinks made by Tausif were refreshing and top-notch" 
+        Make sure to include these sentences in the review naturally and randomly and paraphrase them however you like "Service by Sneha was exceptional" "Drinks made by Tausif were refreshing and top-notch" 
         
         Please introduce some common, natural-sounding spelling mistakes to make it sound more like a real, casual user review. 
         For example, 'atmosphere' could be 'atmospher', 'amazing' could be 'amazin'. Keep the tone natural and personal. 
